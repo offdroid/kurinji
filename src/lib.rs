@@ -33,35 +33,35 @@ impl Plugin for KurinjiPlugin {
             .add_event::<OnActionProgress>()
             .add_event::<OnActionEnd>()
             .add_system_to_stage(
-                stage::EVENT,
+                CoreStage::PreUpdate,
                 Kurinji::action_event_producer.system(),
             )
             // reset
             .add_system_to_stage(
-                stage::PRE_UPDATE,
+                CoreStage::Update,
                 Kurinji::action_reset_system.system(),
             )
             // joystick
             .add_system_to_stage(
-                stage::UPDATE,
+                CoreStage::Update,
                 Kurinji::gamepad_event_system.system(),
             )
             .add_system_to_stage(
-                stage::UPDATE,
+                CoreStage::Update,
                 Kurinji::gamepad_button_press_input_system.system(),
             )
             // keyboard
             .add_system_to_stage(
-                stage::UPDATE,
+                CoreStage::Update,
                 Kurinji::kb_key_press_input_system.system(),
             )
             // mouse
             .add_system_to_stage(
-                stage::UPDATE,
+                CoreStage::Update,
                 Kurinji::mouse_button_press_input_system.system(),
             )
             .add_system_to_stage(
-                stage::UPDATE,
+                CoreStage::Update,
                 Kurinji::mouse_move_event_system.system(),
             );
     }
